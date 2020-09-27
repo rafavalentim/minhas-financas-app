@@ -1,26 +1,59 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Login from './views/login'
+
+import 'bootswatch/dist/flatly/bootstrap.css';
+import './custom.css';
+
+class App extends React.Component {
+
+  render(){
+
+    return(
+      <div>
+        <Login></Login>
+      </div>
+    )
+  }
 }
 
 export default App;
+
+
+
+
+
+/*class App extends React.Component {
+
+  state = {
+    numero1: '',
+    numero2:'',
+    resultado:''
+  }
+
+  somar = () => {
+
+    const resultado = parseInt(this.state.numero1) + parseInt(this.state.numero2)
+
+    this.setState({ resultado: resultado })
+  }
+  
+  render(){
+    return(
+      <div>
+        <label>Primeiro Número:</label>
+        <input type='text' value={this.state.numero1} 
+          onChange={(e) => this.setState({numero1: e.target.value})}></input>
+       <br />
+       <label>Segundo Número:</label>
+        <input type='text' value={this.state.numero2} 
+          onChange={(e) => this.setState({numero2: e.target.value})}></input>
+        <br />
+        <button onClick={this.somar}>Somar          
+        </button>
+        <br />
+        Resultado da soma: {this.state.resultado}
+        </div>
+    );
+  }
+}*/
