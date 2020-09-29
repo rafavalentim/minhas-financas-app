@@ -20,7 +20,7 @@ function NavBar(){
                 <NavBarItem label='Home' href='#/' />
                 <NavBarItem label='Usuários' href='#/cadastro-usuarios' />
                 <NavBarItem label='Lançamento' href='#/' />
-                <NavBarItem label='Login' href='#/login' />
+                <NavBarItem label='Login' href='#/git login' />
             </ul>
     
           </div>
