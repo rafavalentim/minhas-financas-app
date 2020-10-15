@@ -2,6 +2,10 @@ import React from 'react'
 
 import Card from '../component/card'
 import FormGroup from '../component/form-group'
+import { withRouter } from 'react-router-dom'
+import LocalStorageService from '../app/service/localstorageService'
+import {mensagemErro, mensagemSucesso} from '../component/toastr'
+import UsuarioService from '../app/service/usuarioService'
 
 class CadastroUsuario extends React.Component{
 
@@ -12,8 +16,63 @@ class CadastroUsuario extends React.Component{
         senhaRepeticao: ''
     }
 
+    constructor(){
+        super();
+        this.service = new UsuarioService();
+    }
+
+    validar(){
+        const msgs = []
+
+        if(!this.state.nome){
+            msgs.push('O campo Nome é obrigatório.')
+        }
+
+        if(!this.state.email){
+            msgs.push('O campo E-mail é obrigatório.')
+        }else if(!this.state.email.match(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i)){
+            msgs.push('Informe um e-mail válido.')
+        }
+
+        if(!this.state.senha || !this.state.senhaRepeticao){
+            msgs.push('Digite a senha duas vezes.');
+        }else if(this.state.senha !== this.state.senhaRepeticao){
+            msgs.push('As senhas não batem.')
+        }
+        
+        return msgs
+    }
+
     cadastrar = () => {
-            console.log(this.state)
+
+        const mensagemValidacao = this.validar()
+
+        if(mensagemValidacao && mensagemValidacao.length >0){
+            
+            mensagemValidacao.forEach((msg, index)=>{
+                mensagemErro(msg)            
+            })
+            return false
+        }
+
+        const usuario = {
+            nome: this.state.nome,
+            email: this.state.email,
+            senha: this.state.senha
+        }
+
+            this.service.salvar(usuario)
+                .then(response => {
+                        mensagemSucesso('Usuário cadastrado com sucesso. Faça o login para acessar o sistema.')
+                        this.props.history.push('/login')
+                }).catch(error => {
+                        mensagemErro(error.response.data)
+                })
+
+    }
+
+    cancelarCadastro = () => {
+        this.props.history.push('/login')
 
     }
 
@@ -65,7 +124,7 @@ class CadastroUsuario extends React.Component{
                             placeholder="Password" />
                     </FormGroup>
                     <button onClick={this.cadastrar}  className='btn btn-success'>Salvar</button>
-                    <button  className='btn btn-danger'>Salvar</button>
+                    <button onClick={this.cancelarCadastro} className='btn btn-danger'>Cancelar</button>
                 </div>
             </div>
         </div>
@@ -80,4 +139,4 @@ class CadastroUsuario extends React.Component{
 
 
 }
-export default CadastroUsuario
+export default withRouter (CadastroUsuario)

@@ -2,6 +2,10 @@ import React from 'react';
 
 import Card from '../component/card'
 import FormGroup from '../component/form-group'
+import { withRouter } from 'react-router-dom'
+import UsuarioService from '../app/service/usuarioService'
+import LocalStorageService from '../app/service/localstorageService'
+import {mensagemErro} from '../component/toastr'
 
 class Login extends React.Component{
 
@@ -11,10 +15,28 @@ class Login extends React.Component{
         senha: ''
     }
 
+    constructor(){
+        super();
+        this.service = new UsuarioService();
+    }
+
 //Criando uma Function para realizar as ações de entrar e cadastrar no sistema
-entrar = () =>{
-    console.log('Email: ',this.state.email)
-    console.log('Senha: ',this.state.senha)
+entrar = async () =>{
+    this.service.autenticar({
+        email: this.state.email,
+        senha: this.state.senha
+    }).then(response => {
+            LocalStorageService.adicionaItem('_usuario_logado', response.data) //Armazena os dados dos usuarios em uma session
+            this.props.history.push('/home')
+        }).catch( erro => {
+            console.log('Entrou no erro.')
+            mensagemErro(erro.response.data)
+        })
+        console.log('Executou a requisição.')
+} 
+
+prepararCadastrar = () => {
+    this.props.history.push('/cadastro-usuarios')
 }
 
 render(){
@@ -24,6 +46,9 @@ render(){
         <div className='col-md-6' style={{position : 'relative', left :'300px'} }>
             <div className='bs-docs-section'>
                 <Card title='Login'>
+                    <div className='row'>
+                        <span></span>
+                    </div>
                     <div className='row'>
                         <div className='col-lg-12'>
                             <div className='bs-component'>
@@ -47,7 +72,7 @@ render(){
                                             placeholder="Password" />
                                     </FormGroup>
                                     <button  onClick={this.entrar} className='btn btn-success'>Entrar</button>
-                                    <button className='btn btn-danger'>Cadastrar</button>
+                                    <button  onClick={this.prepararCadastrar} className='btn btn-danger'>Cadastrar</button>
                                 </fieldset>
                                 </form>
                                 
@@ -66,4 +91,4 @@ render(){
 
 }
 
-export default Login
+export default withRouter (Login)
