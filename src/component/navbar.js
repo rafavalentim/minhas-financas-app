@@ -4,6 +4,13 @@ import NavBarItem from './navBarItem'
 
 import NabBarItem from './navBarItem'
 
+import AuthService from '../app/service/authService'
+
+const deslogar = () =>{
+    AuthService.removerUsuarioAutenticado();
+
+};
+
 function NavBar(){
     return(
 
@@ -20,7 +27,7 @@ function NavBar(){
                 <NavBarItem label='Home' href='#/home' />
                 <NavBarItem label='Usuários' href='#/cadastro-usuarios' />
                 <NavBarItem label='Lançamento' href='#/consulta-lancamentos' />
-                <NavBarItem label='Login' href='#/login' />
+                <NavBarItem label='Sair' href='#/login' onClick={deslogar} />
             </ul>
     
           </div>
