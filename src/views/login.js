@@ -71,8 +71,14 @@ render(){
                                             id="exampleInputPassword1" 
                                             placeholder="Password" />
                                     </FormGroup>
-                                    <button  onClick={this.entrar} className='btn btn-success'>Entrar</button>
-                                    <button  onClick={this.prepararCadastrar} className='btn btn-danger'>Cadastrar</button>
+                                    <button  onClick={this.entrar} 
+                                             className='btn btn-success'>
+                                                 <i className="pi pi-sign-in"></i>&nbsp;Entrar
+                                    </button>
+                                    <button  onClick={this.prepararCadastrar} 
+                                             className='btn btn-danger'>
+                                                 <i className="pi pi-plus"></i>&nbsp;Cadastrar
+                                    </button>
                                 </fieldset>
                                 </form>
                                 
