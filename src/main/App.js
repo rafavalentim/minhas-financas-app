@@ -2,6 +2,7 @@ import React from 'react';
 
 import Rotas from './rotas'
 import NavBar from '../component/navbar'
+import ProvedorAutenticacao from './provedorAutenticacao'
 
 import Login from '../views/login'
 
@@ -24,12 +25,12 @@ class App extends React.Component {
   render(){
 
     return(
-      <>
+      <ProvedorAutenticacao>
         <NavBar />
-        <div className='container'>
-          <Rotas />
-        </div>
-      </>
+          <div className='container'>
+            <Rotas />
+          </div>
+      </ProvedorAutenticacao>
     )
   }
 }

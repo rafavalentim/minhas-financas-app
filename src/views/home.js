@@ -1,6 +1,7 @@
 import { render } from '@testing-library/react'
 import React from 'react'
 import LocalStorageService from '../app/service/localstorageService'
+import { AuthContext } from '../main/provedorAutenticacao'
 
 
 import UsuarioService from '../app/service/usuarioService'
@@ -19,7 +20,8 @@ class Home extends React.Component{
     //Faz parte do ciclo de vida, executa algo assim que o componente estiver renderizado.
     componentDidMount(){
         
-        const objetoUsuarioLogado = LocalStorageService.obterItem('_usuario_logado')
+        //const objetoUsuarioLogado = LocalStorageService.obterItem('_usuario_logado')
+        const objetoUsuarioLogado = this.context.usuarioAutenticado
 
         this.usuarioService
         .obterSaldoPorUsuario(objetoUsuarioLogado.id)
@@ -61,4 +63,5 @@ class Home extends React.Component{
     }
 
 }
+Home.contextType = AuthContext;
 export default Home

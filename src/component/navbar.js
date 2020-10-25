@@ -4,19 +4,14 @@ import NavBarItem from './navBarItem'
 
 import NabBarItem from './navBarItem'
 
-import AuthService from '../app/service/authService'
+import { AuthConsumer } from '../main/provedorAutenticacao'
 
-const deslogar = () =>{
-    AuthService.removerUsuarioAutenticado();
-
-};
-
-function NavBar(){
+function NavBar(props){
     return(
 
         <div className="navbar navbar-expand-lg fixed-top navbar-dark bg-primary" >
         <div className="container">
-          <a href="home.html" className="navbar-brand" >Minhas Finanças</a>
+          <a href="#/home" className="navbar-brand" >Minhas Finanças</a>
           <button className="navbar-toggler" type="button" data-toggle="collapse" 
                   data-target="#navbarResponsive" aria-controls="navbarResponsive" 
                   aria-expanded="false" aria-label="Toggle navigation">
@@ -24,10 +19,10 @@ function NavBar(){
           </button>
           <div className="collapse navbar-collapse" id="navbarResponsive">
             <ul className="navbar-nav">
-                <NavBarItem label='Home' href='#/home' />
-                <NavBarItem label='Usuários' href='#/cadastro-usuarios' />
-                <NavBarItem label='Lançamento' href='#/consulta-lancamentos' />
-                <NavBarItem label='Sair' href='#/login' onClick={deslogar} />
+                <NavBarItem render={props.isUsuarioAutenticado} label='Home' href='#/home' />
+                <NavBarItem render={props.isUsuarioAutenticado} label='Usuários' href='#/cadastro-usuarios' />
+                <NavBarItem render={props.isUsuarioAutenticado} label='Lançamento' href='#/consulta-lancamentos' />
+                <NavBarItem render={props.isUsuarioAutenticado} label='Sair' href='#/login' onClick={props.deslogar} />
             </ul>
     
           </div>
@@ -38,4 +33,10 @@ function NavBar(){
         )
     
 }
-export default NavBar
+export default () => (
+  <AuthConsumer>
+    {(context) => (
+      <NavBar isUsuarioAutenticado={context.isAutenticado} deslogar={context.encerrarSessao} />
+    )}
+  </AuthConsumer>
+)
