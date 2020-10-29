@@ -28,9 +28,7 @@ function NavBar(props){
           </div>
         </div>
       </div>
-
-
-        )
+    )
     
 }
 export default () => (
