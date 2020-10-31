@@ -35,6 +35,11 @@ class CadastroUsuario extends React.Component{
             const msgs = erro.mensagens;
             msgs.forEach(msg =>  mensagemErro(msg));
             return false;
+
+            
+
+
+
         }
 
 
