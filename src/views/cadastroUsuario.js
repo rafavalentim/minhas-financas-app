@@ -33,6 +33,9 @@ class CadastroUsuario extends React.Component{
             this.service.validar(usuario)
         }catch(erro){
             const msgs = erro.mensagens;
+
+            console.log("Erro:", erro.mensagens);
+
             msgs.forEach(msg =>  mensagemErro(msg));
             return false;
 
