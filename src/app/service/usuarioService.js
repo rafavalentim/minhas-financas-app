@@ -33,10 +33,10 @@ class UsuarioService extends ApiService{
             erros.push('Informe um e-mail válido.');
         }
 
-        if(!usuario.senha || !this.state.senhaRepeticao){
+        if(!usuario.senha || !usuario.senhaRepeticao){
             erros.push('Digite a senha duas vezes.');
 
-        }else if(this.state.senha !== this.state.senhaRepeticao){
+        }else if(usuario.senha !== usuario.senhaRepeticao){
             erros.push('As senhas não batem.');
         }
 
