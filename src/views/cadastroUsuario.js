@@ -95,7 +95,7 @@ class CadastroUsuario extends React.Component{
                             placeholder="Password" />
                     </FormGroup>
                     <FormGroup label='Repita a senha' htmlfor='inputSenhaRepeticao'>
-                    <input type="password2"
+                    <input type="password"
                             value={this.state.senhaRepeticao}
                             onChange={e => this.setState({senhaRepeticao: e.target.value})} 
                             className="form-control" 

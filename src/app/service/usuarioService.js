@@ -39,7 +39,7 @@ class UsuarioService extends ApiService{
         }
         
         if(usuario.senha !== usuario.senhaRepeticao){
-
+            
             console.log('Senha: ', usuario.senha);
             console.log('SenhaRepeticao: ', usuario.senhaRepeticao);
 
