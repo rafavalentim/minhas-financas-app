@@ -33,15 +33,16 @@ class UsuarioService extends ApiService{
             erros.push('Informe um e-mail válido.');
         }
 
-        console.log('Senha: ', usuario.senha);
-        console.log('SenhaRepeticao: ', usuario.senhaRepeticao);
-
         if(!usuario.senha || !usuario.senhaRepeticao){
             erros.push('Digite a senha duas vezes.');
 
         }
         
         if(usuario.senha !== usuario.senhaRepeticao){
+
+            console.log('Senha: ', usuario.senha);
+            console.log('SenhaRepeticao: ', usuario.senhaRepeticao);
+
             erros.push('As senhas não batem.');
         }
 
