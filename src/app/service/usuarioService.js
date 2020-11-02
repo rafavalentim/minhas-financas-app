@@ -41,8 +41,11 @@ class UsuarioService extends ApiService{
         }
 
         if(erros && erros.length > 0){
+            console.log("Quantidade de Erros na Validação:", erros.length);
             throw new ErroValidacao(erros);
         }
+
+        console.log("Validação erros: ", erros );
         
     }
 
